@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <h1>Arrays</h1>
+    <script>
+        // Задание1
+        let nums = [5, 2, 4]
+        let squares = []
+        nums[99] = 3
+        for (let index in nums) {
+            if (nums[index]) {
+                squares.push(nums[index] ** 2)
+            }
+        }
+        console.log(squares)    
+        
+        // Задание2
+        const list = [
+            {product: "Apple", price: 25},
+            {product: "Cherry", price: 32},
+            {product: "Orange", price: 40},
+            {product: "Melon", price: 50},
+            {product: "Strawberry", price: 50},
+        ]
+        let price = []
+        for (let el in list) {
+            price.push(list[el].price)
+        }
+        let maxPrice = Math.max(...price)
+        for (let el in list) {
+            if (list[el].price === maxPrice) {
+                console.log(list[el].product)
+                break
+            }
+        }
+
+        // Задание3
+        let productPrice = {}
+        for (el in list) {
+            productPrice[list[el].product] = list[el].price
+        }
+        let products = []
+        for (let el in list) {
+            products.push(list[el].product)
+        }
+        let basket = []
+        let randomNum = Math.round((Math.random() * 20) + 10)
+        for (let i = 0; i < randomNum; i++) {
+            const randomProduct = products[Math.round(Math.random() * (products.length - 1))]
+            const productInBasket = basket.find(item => item.product === randomProduct)
+            if (productInBasket) {
+                productInBasket.cnt += 1
+            } else {
+                basket.push({
+                    product: randomProduct,
+                    price: productPrice[randomProduct],
+                    cnt: 1,
+                })
+            }
+        }
+        const totalCost = basket.reduce((total, item) => total + (item.price * item.cnt), 0)
+        console.log(basket)
+        console.log(totalCost)
+    </script>
+</body>
+</html>
